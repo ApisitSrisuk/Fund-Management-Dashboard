@@ -1,0 +1,51 @@
+name: fund-management
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${DB_USER:-fund}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-fund}
+      POSTGRES_DB: ${DB_NAME:-fund_management}
+    ports:
+      - "${DB_PORT_HOST:-5432}:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build: ./backend
+    environment:
+      PORT: 3000
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: ${DB_USER:-fund}
+      DB_PASSWORD: ${DB_PASSWORD:-fund}
+      DB_NAME: ${DB_NAME:-fund_management}
+      DB_SYNCHRONIZE: "true"
+      SEED_ON_BOOT: "true"
+    ports:
+      - "${API_PORT_HOST:-3000}:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/api/health || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "${WEB_PORT_HOST:-8080}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  db-data:
