@@ -22,10 +22,6 @@ function readStoredId(): string | null {
   }
 }
 
-/**
- * There is no auth in scope, so the "current customer" is picked from a dropdown.
- * In a real app this would come from the session/JWT instead.
- */
 export function CustomerProvider({ children }: { children: ReactNode }) {
   const { data: customers = [], isLoading, error } = useCustomers();
   const [selectedId, setSelectedId] = useState<string | null>(readStoredId);
@@ -37,7 +33,7 @@ export function CustomerProvider({ children }: { children: ReactNode }) {
     try {
       localStorage.setItem(STORAGE_KEY, customer.id);
     } catch {
-      // storage unavailable (private mode) — selection just won't persist
+      return;
     }
   }, [customer]);
 

@@ -19,10 +19,6 @@ export class Portfolio {
   @JoinColumn({ name: 'customer_id' })
   customer: Customer;
 
-  /**
-   * Business rule: 1 portfolio ↔ exactly 1 policy. Enforced by a single NOT NULL FK column
-   * (no join table) and by not exposing any endpoint that changes it after creation.
-   */
   @Column({ name: 'policy_id', type: 'uuid' })
   policyId: string;
 

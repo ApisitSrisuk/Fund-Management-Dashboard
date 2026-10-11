@@ -1,12 +1,10 @@
 import { isApiError } from '../api/client';
 
-/** Per-screen overrides so the same status code can read differently in context. */
 export interface ErrorMessageOverrides {
   conflict?: string;
   notFound?: string;
 }
 
-/** Turns any thrown value into a user-facing Thai message, keyed on HTTP status. */
 export function getErrorMessage(error: unknown, overrides: ErrorMessageOverrides = {}): string {
   if (!isApiError(error)) {
     return error instanceof Error ? error.message : 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ';

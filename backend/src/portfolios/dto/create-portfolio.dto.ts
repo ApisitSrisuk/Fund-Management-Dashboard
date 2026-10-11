@@ -7,7 +7,6 @@ export class CreatePortfolioDto {
   @IsUUID()
   policyId: string;
 
-  /** Defaults to the policy name when omitted. */
   @IsOptional()
   @IsString()
   @IsNotEmpty()

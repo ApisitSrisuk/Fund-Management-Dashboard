@@ -1,5 +1,3 @@
-// Runs a real PostgreSQL instance from node_modules — no Docker or system install needed.
-// Data persists in backend/.local-pg; delete that folder to reset.
 import EmbeddedPostgres from 'embedded-postgres';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';

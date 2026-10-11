@@ -21,7 +21,6 @@ export class PolicyAllocation {
   @Column({ name: 'stock_name', length: 120 })
   stockName: string;
 
-  /** Percentage of the policy (0–100, 2 decimals). Allocations of one policy sum to 100. */
   @Column({ type: 'numeric', precision: 5, scale: 2, transformer: numericTransformer })
   percentage: number;
 }

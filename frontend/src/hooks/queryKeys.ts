@@ -1,4 +1,3 @@
-/** Centralised query keys so mutations can invalidate exactly what they affect. */
 export const queryKeys = {
   customers: ['customers'] as const,
   policies: ['policies'] as const,

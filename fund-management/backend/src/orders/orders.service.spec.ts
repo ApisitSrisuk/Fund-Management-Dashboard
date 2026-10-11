@@ -53,8 +53,8 @@ describe('OrdersService', () => {
       'rejects with 409 when the portfolio already has a %s order',
       async (activeStatus) => {
         manager.findOne
-          .mockResolvedValueOnce(portfolio) // portfolio lookup (locked)
-          .mockResolvedValueOnce(buildOrder({ status: activeStatus })); // active order lookup
+          .mockResolvedValueOnce(portfolio)
+          .mockResolvedValueOnce(buildOrder({ status: activeStatus }));
 
         const promise = service.create({ portfolioId: PORTFOLIO_ID, amount: 5000 });
 

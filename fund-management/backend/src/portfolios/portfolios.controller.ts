@@ -17,7 +17,6 @@ export class PortfoliosController {
     return this.portfoliosService.findOne(id);
   }
 
-  /** 201 created | 400 invalid body | 404 customer/policy not found */
   @Post()
   create(@Body() dto: CreatePortfolioDto): Promise<PortfolioWithLatestOrder> {
     return this.portfoliosService.create(dto);

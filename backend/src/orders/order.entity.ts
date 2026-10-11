@@ -15,8 +15,6 @@ import { OrderStatus } from './order-status';
 export const ACTIVE_ORDER_UNIQUE_INDEX = 'UQ_orders_one_active_per_portfolio';
 
 @Entity('orders')
-// DB-level guarantee for "max 1 PENDING/PROCESSING order per portfolio" — the service check gives a
-// friendly 409, this partial unique index closes the race window between concurrent requests.
 @Index(ACTIVE_ORDER_UNIQUE_INDEX, ['portfolioId'], {
   unique: true,
   where: `"status" IN ('PENDING', 'PROCESSING')`,

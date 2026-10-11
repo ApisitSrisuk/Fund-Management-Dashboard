@@ -11,13 +11,11 @@ export function useOrders(customerId: string | undefined) {
     queryKey: queryKeys.orders(customerId ?? ''),
     queryFn: ({ signal }) => api.get<OrderWithPortfolio[]>(`/orders${toQueryString({ customerId })}`, signal),
     enabled: Boolean(customerId),
-    // Poll only while something can still change, so "current status" stays current.
     refetchInterval: (query) =>
       query.state.data?.some((order) => ACTIVE_ORDER_STATUSES.includes(order.status)) ? ACTIVE_POLL_MS : false,
   });
 }
 
-/** Orders affect the portfolio list too (latest order status), so invalidate both. */
 function useInvalidateOrderViews() {
   const queryClient = useQueryClient();
   return () =>
@@ -39,12 +37,10 @@ export function useCancelOrder() {
   const invalidate = useInvalidateOrderViews();
   return useMutation({
     mutationFn: (orderId: string) => api.post<OrderWithPortfolio>(`/orders/${orderId}/cancel`),
-    // Also refresh on error: a 409 means our list is stale (status moved on server-side).
     onSettled: invalidate,
   });
 }
 
-/** Demo-only: simulates the processing side advancing the workflow. */
 export function useUpdateOrderStatus() {
   const invalidate = useInvalidateOrderViews();
   return useMutation({

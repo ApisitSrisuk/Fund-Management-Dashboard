@@ -13,7 +13,6 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 10_000,
-      // 4xx won't fix itself on retry; only retry network/5xx errors.
       retry: (failureCount, error) =>
         failureCount < 2 && (!isApiError(error) || error.kind === 'network' || error.kind === 'server'),
     },

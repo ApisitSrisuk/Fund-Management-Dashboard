@@ -110,7 +110,6 @@ h1 {
   clip: rect(0 0 0 0);
 }
 
-/* ---------- layout ---------- */
 .topbar {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
@@ -201,7 +200,6 @@ h1 {
   gap: 16px;
 }
 
-/* ---------- surfaces ---------- */
 .card,
 .panel {
   background: var(--surface);
@@ -279,7 +277,6 @@ h1 {
   align-items: center;
 }
 
-/* ---------- allocation ---------- */
 .allocation__bar {
   display: flex;
   height: 12px;
@@ -326,7 +323,6 @@ h1 {
 .series-4 { background: var(--s4); }
 .series-5 { background: var(--s5); }
 
-/* ---------- badges ---------- */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -361,7 +357,6 @@ h1 {
 .risk--mid { background: var(--warn-bg); color: var(--warn); }
 .risk--high { background: var(--danger-bg); color: var(--danger); }
 
-/* ---------- table ---------- */
 .table-wrap {
   overflow-x: auto;
 }
@@ -404,7 +399,6 @@ h1 {
   flex-wrap: wrap;
 }
 
-/* ---------- forms ---------- */
 .form {
   display: grid;
   gap: 14px;
@@ -527,7 +521,6 @@ select:focus-visible,
   gap: 8px;
 }
 
-/* ---------- buttons ---------- */
 .btn {
   font: inherit;
   font-weight: 600;
@@ -580,7 +573,6 @@ select:focus-visible,
   padding: 4px 8px;
 }
 
-/* ---------- modal ---------- */
 .modal {
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -606,7 +598,6 @@ select:focus-visible,
   font-size: 1.15rem;
 }
 
-/* ---------- states ---------- */
 .state {
   padding: 40px 20px;
   text-align: center;

@@ -10,7 +10,7 @@ async function bootstrap(): Promise<void> {
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
-      forbidNonWhitelisted: true, // unknown fields → 400 instead of being silently dropped
+      forbidNonWhitelisted: true,
       transform: true,
     }),
   );

@@ -19,7 +19,7 @@ export class PortfoliosService {
   ) {}
 
   async findAllByCustomer(customerId: string): Promise<PortfolioWithLatestOrder[]> {
-    await this.customersService.findOne(customerId); // 404 for unknown customer instead of an empty list
+    await this.customersService.findOne(customerId);
     const portfolios = await this.portfolios.find({
       where: { customerId },
       relations: { policy: true },
@@ -50,7 +50,6 @@ export class PortfoliosService {
     return this.findOne(saved.id);
   }
 
-  /** One query for all portfolios: Postgres DISTINCT ON keeps the newest order per portfolio. */
   private async findLatestOrders(portfolioIds: string[]): Promise<Map<string, Order>> {
     if (portfolioIds.length === 0) return new Map();
     const latest = await this.orders

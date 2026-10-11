@@ -15,12 +15,10 @@ export class ApiError extends Error {
     this.kind = ApiError.kindFrom(status);
   }
 
-  /** Domain error code from the backend, e.g. ACTIVE_ORDER_EXISTS. */
   get code(): string | undefined {
     return this.body?.code;
   }
 
-  /** All server-side messages (ValidationPipe can return several). */
   get messages(): string[] {
     const message = this.body?.message;
     if (Array.isArray(message)) return message;

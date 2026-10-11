@@ -3,7 +3,6 @@ export interface PolicyAllocation {
   policyId: string;
   symbol: string;
   stockName: string;
-  /** 0–100 */
   percentage: number;
 }
 
@@ -12,7 +11,6 @@ export interface Policy {
   code: string;
   name: string;
   description: string;
-  /** 1 (lowest) – 8 (highest) */
   riskLevel: number;
   createdAt: string;
 }

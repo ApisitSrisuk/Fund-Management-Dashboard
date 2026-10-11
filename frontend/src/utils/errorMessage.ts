@@ -1,7 +1,6 @@
 import { isApiError } from '../api/client';
 import type { ErrorMessageOverrides } from '../types';
 
-/** Turns any thrown value into a user-facing Thai message, keyed on HTTP status. */
 export function getErrorMessage(error: unknown, overrides: ErrorMessageOverrides = {}): string {
   if (!isApiError(error)) {
     return error instanceof Error ? error.message : 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ';

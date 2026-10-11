@@ -8,7 +8,6 @@ interface AllocationBarProps {
   showLegend?: boolean;
 }
 
-/** Stacked 100% bar of a policy's stock weights. Colours cycle through a fixed 6-step series. */
 export function AllocationBar({ allocations, showLegend = true }: AllocationBarProps) {
   return (
     <div className="allocation">

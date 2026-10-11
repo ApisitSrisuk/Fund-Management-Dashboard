@@ -5,7 +5,6 @@ export type OrderStatus = (typeof ORDER_STATUSES)[number];
 
 export const ACTIVE_ORDER_STATUSES: readonly OrderStatus[] = ['PENDING', 'PROCESSING'];
 
-/** Statuses the processing side may set via PATCH /orders/:id/status. */
 export type SystemOrderStatus = Extract<OrderStatus, 'PROCESSING' | 'COMPLETED' | 'FAILED'>;
 
 export interface Order {

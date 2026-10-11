@@ -21,7 +21,6 @@ import { SeedService } from './seed/seed.service';
         password: config.get<string>('DB_PASSWORD', 'fund'),
         database: config.get<string>('DB_NAME', 'fund_management'),
         autoLoadEntities: true,
-        // Demo convenience; production should run migrations instead (see README → What's missing).
         synchronize: config.get<string>('DB_SYNCHRONIZE', 'true') === 'true',
       }),
     }),

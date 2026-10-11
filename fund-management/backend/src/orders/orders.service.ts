@@ -9,7 +9,6 @@ import { SystemSettableStatus } from './dto/update-order-status.dto';
 import { ACTIVE_ORDER_UNIQUE_INDEX, Order } from './order.entity';
 import { ACTIVE_ORDER_STATUSES, canTransition, OrderStatus } from './order-status';
 
-/** Machine-readable error codes so the frontend doesn't have to parse messages. */
 export const OrderErrorCode = {
   ACTIVE_ORDER_EXISTS: 'ACTIVE_ORDER_EXISTS',
   INVALID_STATUS_TRANSITION: 'INVALID_STATUS_TRANSITION',
@@ -41,11 +40,6 @@ export class OrdersService {
     return order;
   }
 
-  /**
-   * Business rule: a portfolio may have at most one PENDING/PROCESSING order.
-   * The portfolio row is locked (SELECT ... FOR UPDATE) so concurrent creates on the same
-   * portfolio are serialized; the partial unique index is the last line of defence.
-   */
   async create(dto: CreateOrderDto): Promise<Order> {
     const saved = await this.dataSource.transaction(async (manager) => {
       const portfolio = await manager.findOne(Portfolio, {
@@ -76,12 +70,10 @@ export class OrdersService {
     return this.findOne(saved.id);
   }
 
-  /** Business rule: only PENDING orders can be cancelled. */
   cancel(id: string): Promise<Order> {
     return this.transition(id, OrderStatus.CANCELLED);
   }
 
-  /** Advances the workflow PENDING → PROCESSING → COMPLETED / FAILED (called by the processing side). */
   updateStatus(id: string, status: SystemSettableStatus): Promise<Order> {
     return this.transition(id, status);
   }

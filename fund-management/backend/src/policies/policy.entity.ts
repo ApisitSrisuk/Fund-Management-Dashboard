@@ -15,7 +15,6 @@ export class Policy {
   @Column({ type: 'text' })
   description: string;
 
-  /** 1 (lowest) – 8 (highest), mirroring the SEC Thailand fund risk scale. */
   @Column({ name: 'risk_level', type: 'smallint' })
   riskLevel: number;
 

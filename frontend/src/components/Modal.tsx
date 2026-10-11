@@ -7,7 +7,6 @@ interface ModalProps {
   children: ReactNode;
 }
 
-/** Thin wrapper over native <dialog>: gives focus trapping, Esc-to-close and backdrop for free. */
 export function Modal({ open, title, onClose, children }: ModalProps) {
   const ref = useRef<HTMLDialogElement>(null);
   const titleId = useId();
@@ -26,7 +25,7 @@ export function Modal({ open, title, onClose, children }: ModalProps) {
       aria-labelledby={titleId}
       onClose={onClose}
       onClick={(e) => {
-        if (e.target === ref.current) onClose(); // click on backdrop
+        if (e.target === ref.current) onClose();
       }}
     >
       <div className="modal__content">

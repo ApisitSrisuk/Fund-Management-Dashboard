@@ -56,7 +56,6 @@ const CUSTOMERS: Pick<Customer, 'name' | 'email'>[] = [
   { name: 'สมหญิง รักออม', email: 'somying@example.com' },
 ];
 
-/** Idempotent demo seed: inserts reference data only when the tables are empty. */
 @Injectable()
 export class SeedService implements OnApplicationBootstrap {
   private readonly logger = new Logger(SeedService.name);

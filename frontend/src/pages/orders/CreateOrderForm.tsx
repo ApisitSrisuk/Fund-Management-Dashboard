@@ -22,7 +22,6 @@ function isOrderStatus(value: unknown): value is OrderStatus {
   return typeof value === 'string' && (ORDER_STATUSES as readonly string[]).includes(value);
 }
 
-/** 409 from POST /orders → explain which order blocks the new one. */
 function conflictMessage(error: unknown): string {
   const status = isApiError(error) ? error.body?.activeOrderStatus : undefined;
   const suffix = isOrderStatus(status) ? ` (สถานะ ${status})` : '';

@@ -6,13 +6,8 @@ export enum OrderStatus {
   CANCELLED = 'CANCELLED',
 }
 
-/** Statuses that block a new order on the same portfolio. */
 export const ACTIVE_ORDER_STATUSES: readonly OrderStatus[] = [OrderStatus.PENDING, OrderStatus.PROCESSING];
 
-/**
- * Allowed transitions. PENDING → PROCESSING → COMPLETED / FAILED,
- * plus PENDING → CANCELLED (customer cancel). Terminal states have no outgoing edges.
- */
 export const ORDER_STATUS_TRANSITIONS: Readonly<Record<OrderStatus, readonly OrderStatus[]>> = {
   [OrderStatus.PENDING]: [OrderStatus.PROCESSING, OrderStatus.CANCELLED],
   [OrderStatus.PROCESSING]: [OrderStatus.COMPLETED, OrderStatus.FAILED],
